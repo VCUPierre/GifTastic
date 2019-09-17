@@ -2,27 +2,44 @@ var topics = ["dwight schrute", "michael scott", "jim halpert", "pam beesly", "c
 createButtons(1, topics);
 $(document).on('click','button', function(event){
     console.log(event);
-    console.log(event.currentTarget.id);
+    console.log('id - ' + event.currentTarget.id);
     console.log(event.currentTarget.innerText);
-    //let clickedBtnId = event.currentTarget.id;
-    let clickedBtnText = event.currentTarget.innerText
-    getGIFs(clickedBtnText);
+    let inputVal = $('#search').val();
+    console.log("inputval - "+inputVal);
+    let clickedBtnId = event.currentTarget.id;
+    if (clickedBtnId === 'searchBtn'){
+        //alert(inputVal);
+        topics.push(inputVal);
+        console.log(topics);
+        createButtons(2, inputVal);
+    } else {
+        let clickedBtnText = event.currentTarget.innerText
+        getGIFs(clickedBtnText);
+    }
 })
-
-function createButtons(intialOrAdd, array){
+function createButtons(intialOrAdd, arrayOrItem){
     var buttonFromDom = $("#buttons");
     if (intialOrAdd === 1){
-        for (let i = 0; i < array.length; i++){
+        for (let i = 0; i < arrayOrItem.length; i++){
             let aTagHolder = $("<a>");
-            let gifbutton = $("<button>" , {id: "button" + i, class: "btn btn-success m-2", type: "button", value: i});
-            gifbutton.text(topics[i]);
+            let gifbutton = $("<button>" , {id: "button" + i, class: "btn btn-success m-2", type: "button", value: arrayOrItem[i]});
+            gifbutton.text(arrayOrItem[i]);
             aTagHolder.append(gifbutton);
             aTagHolder.appendTo(buttonFromDom);
         }
+    } else if (intialOrAdd === 2){
+        let aTagHolder = $("<a>");
+        let gifbutton = $("<button>" , {id: "button" + topics.length - 1, class: "btn btn-success m-2", type: "button", value: arrayOrItem});
+        gifbutton.text(arrayOrItem);
+        aTagHolder.append(gifbutton);
+        aTagHolder.appendTo(buttonFromDom);
+    } else {
+        //do nothing 
     }
 }
 function addGifToPage(results){
     //console.log("addGif-"+JSON.stringify(response));
+    $('#giphy-holder').empty();
     for (let i = 0; i < results.length; i++){
         //console.log("addGif - " + JSON.stringify(results[i]));
         let imgURL = results[i].images.original.url;
