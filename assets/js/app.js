@@ -8,7 +8,6 @@ $(document).on('click','button', function(event){
     console.log("inputval - "+inputVal);
     let clickedBtnId = event.currentTarget.id;
     if (clickedBtnId === 'searchBtn'){
-        //alert(inputVal);
         topics.push(inputVal);
         console.log(topics);
         createButtons(2, inputVal);
@@ -18,7 +17,6 @@ $(document).on('click','button', function(event){
     }
 });
 $(document).on('click','.imgStyle', function() {
-    alert("success");
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
@@ -53,10 +51,8 @@ function createButtons(intialOrAdd, arrayOrItem){
     }
 }
 function addGifToPage(results){
-    //console.log("addGif-"+JSON.stringify(response));
     $('#giphy-holder').empty();
     for (let i = 0; i < results.length; i++){
-        //console.log("addGif - " + JSON.stringify(results[i]));
         let imgURL = results[i].images.original.url;
         let imgURLstill = results[i].images.original_still.url;
         let divElement = $('<div>', {id: 'gif'+i,class:'mr-1'});
@@ -92,4 +88,3 @@ function getGIFs(searchItems) {
         })
     }
 }
-//$("#home").append(JSON.stringify(topics));
