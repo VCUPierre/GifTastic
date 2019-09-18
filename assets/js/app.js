@@ -16,7 +16,22 @@ $(document).on('click','button', function(event){
         let clickedBtnText = event.currentTarget.innerText
         getGIFs(clickedBtnText);
     }
-})
+});
+$(document).on('click','.imgStyle', function() {
+    alert("success");
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+}
+});
 function createButtons(intialOrAdd, arrayOrItem){
     var buttonFromDom = $("#buttons");
     if (intialOrAdd === 1){
@@ -43,9 +58,10 @@ function addGifToPage(results){
     for (let i = 0; i < results.length; i++){
         //console.log("addGif - " + JSON.stringify(results[i]));
         let imgURL = results[i].images.original.url;
+        let imgURLstill = results[i].images.original_still.url;
         let divElement = $('<div>', {id: 'gif'+i,class:'mr-1'});
         let ratingElement = $('<p>');
-        let imgElement = $('<img>', {src: imgURL, alt: 'The Offic Gif image '+i,class:'imgStyle'});
+        let imgElement = $('<img>', {src: imgURLstill, 'data-still': imgURLstill, 'data-animate': imgURL, 'data-state': 'still' ,class:'imgStyle'});
         ratingElement.text(results[i].rating);
         divElement.append(ratingElement,imgElement);
         $('#giphy-holder').prepend(divElement);
