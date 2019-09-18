@@ -72,7 +72,7 @@ function getGIFs(searchItems) {
 
     if (Array.isArray(searchItems)){
         for (let i = 0; i < searchItems.length; i++){
-            let url = 'http://api.giphy.com/v1/gifs/search?api_key='+key+'&q='+searchItems[i]+'&limit=10';
+            let url = 'https://api.giphy.com/v1/gifs/search?api_key='+key+'&q='+searchItems[i]+'&limit=10';
             $.ajax({
                 url: url,
                 method: 'GET'
@@ -81,7 +81,7 @@ function getGIFs(searchItems) {
             })
         }
     } else {
-        let url = 'http://api.giphy.com/v1/gifs/search?api_key='+key+'&q='+searchItems+'&limit=10';
+        let url = 'https://api.giphy.com/v1/gifs/search?api_key='+key+'&q='+searchItems+'&limit=10';
         $.ajax({
             url: url,
             method: 'GET'
