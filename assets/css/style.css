@@ -2,3 +2,8 @@
     height: 250px;
     width: 300px;
 }
+body{
+    background-image: url('../imgs/DunderMifflin.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
